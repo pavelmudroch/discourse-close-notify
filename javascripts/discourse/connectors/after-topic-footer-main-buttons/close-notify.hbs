@@ -1,6 +1,7 @@
 <DButton
-    @icon='lock'
+    @icon={{this.icon}}
     @label={{this.label}}
     @title={{this.title}}
     @class='btn-danger'
+    {{on 'click' this.do}}
 />
