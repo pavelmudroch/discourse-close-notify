@@ -1,6 +1,7 @@
 {
     "name": "Close and Notify",
     "about_url": "https://github.com/pavelmudroch/discourse-close-notify",
+    "component": true,
     "assets": {
         "javascripts/discourse/connectors/after-topic-footer-main-buttons/close-notify.js": "assets/javascripts/discourse/connectors/after-topic-footer-main-buttons/close-notify.js"
     },
