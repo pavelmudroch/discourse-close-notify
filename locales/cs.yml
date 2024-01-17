@@ -1,5 +1,9 @@
 cs:
     close_notify:
         button:
-            label: 'Uzavřít'
-            title: 'zavře toto téma a notifikuje uživatele'
+            close:
+                label: 'Uzavřít'
+                title: 'zavře toto téma a notifikuje uživatele'
+            open:
+                label: 'Otevřít'
+                title: 'otevře toto téma a notifikuje uživatele'

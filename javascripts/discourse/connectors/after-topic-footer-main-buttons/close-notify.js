@@ -8,4 +8,10 @@ export default class CloseNotifyComponent extends Component {
     get title() {
         return themePrefix('close_notify.button.title');
     }
+
+    constructor() {
+        super(...arguments);
+        console.log(arguments);
+        console.log(this);
+    }
 }

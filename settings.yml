@@ -2,3 +2,6 @@ enabled_categories:
     type: list
     list_type: category
     default: ''
+button_color:
+    type: string
+    default: '#000000'
