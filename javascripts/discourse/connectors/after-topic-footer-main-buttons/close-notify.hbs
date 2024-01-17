@@ -1,7 +1,11 @@
-<DButton
-    @icon={{this.icon}}
-    @label={{this.label}}
-    @title={{this.title}}
-    @class='btn-danger'
-    {{on 'click' this.do}}
-/>
+<div>
+    {{#if this.shouldRender}}
+        <DButton
+            @icon={{this.icon}}
+            @label={{this.label}}
+            @title={{this.title}}
+            @class='btn-danger'
+            {{on 'click' this.do}}
+        />
+    {{/if}}
+</div>

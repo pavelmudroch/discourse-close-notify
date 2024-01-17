@@ -5,7 +5,18 @@ import { addObserver, removeObserver } from '@ember/object/observers';
 import { ajax } from 'discourse/lib/ajax';
 import { next } from '@ember/runloop';
 
+function getEnabledCategories() {
+    const enabledCategories = settings.enabled_categories
+        .split('|')
+        .map((c) => parseInt(c, 10))
+        .filter(isFinite);
+    if (enabledCategories.length === 0) return null;
+
+    return enabledCategories;
+}
+
 export default class CloseNotifyComponent extends Component {
+    @tracked shouldRender = false;
     @tracked icon;
     @tracked title;
     @tracked label;
@@ -19,6 +30,9 @@ export default class CloseNotifyComponent extends Component {
             this,
             this.#updateFromTopicStatus,
         );
+        const enabledCategories = getEnabledCategories();
+        const categoryId = this.getTopic().category_id;
+        this.shouldRender = enabledCategories?.includes(categoryId) ?? true;
     }
 
     willDestroy() {
