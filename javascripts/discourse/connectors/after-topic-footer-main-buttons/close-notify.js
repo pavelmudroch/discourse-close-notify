@@ -11,7 +11,6 @@ export default class CloseNotifyComponent extends Component {
 
     constructor() {
         super(...arguments);
-        console.log(arguments);
-        console.log(this);
+        console.log(this.args?.topic);
     }
 }
