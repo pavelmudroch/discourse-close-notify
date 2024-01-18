@@ -1,9 +1,0 @@
-en:
-    close_notify:
-        button:
-            close:
-                label: 'Close'
-                title: 'close topic and notify users'
-            open:
-                label: 'Open'
-                title: 'open topic and notify users'

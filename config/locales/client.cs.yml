@@ -1,0 +1,15 @@
+cs:
+    js:
+        notifications:
+            titles:
+                custom: 'změna stavu tématu'
+        close: 'Uzavřeno'
+        open: 'Otevřeno'
+        close_notify:
+            button:
+                close:
+                    label: 'Uzavřít'
+                    title: 'zavře toto téma a notifikuje uživatele'
+                open:
+                    label: 'Otevřít'
+                    title: 'otevře toto téma a notifikuje uživatele'

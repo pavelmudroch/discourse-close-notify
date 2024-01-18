@@ -1,0 +1,22 @@
+plugins:
+    notify_enabled:
+        type: boolean
+        default: true
+    notify_enabled_categories:
+        type: list
+        list_type: category
+        default: ''
+        client: true
+    notify_on_close:
+        type: boolean
+        default: true
+    notify_on_open:
+        type: boolean
+        default: false
+    notify_watch_level:
+        type: enum
+        default: 'watching'
+        choices:
+            - 'watching'
+            - 'tracking'
+            - 'normal'

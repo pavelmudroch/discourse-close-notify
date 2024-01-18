@@ -1,21 +1,24 @@
 import Component from '@glimmer/component';
+import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { addObserver, removeObserver } from '@ember/object/observers';
 import { ajax } from 'discourse/lib/ajax';
 import { next } from '@ember/runloop';
+import I18n from 'discourse-i18n';
 
-function getEnabledCategories() {
-    const enabledCategories = settings.enabled_categories
+function parseIds(ids) {
+    const parseIds = ids
         .split('|')
         .map((c) => parseInt(c, 10))
         .filter(isFinite);
-    if (enabledCategories.length === 0) return null;
+    if (parseIds.length === 0) return null;
 
-    return enabledCategories;
+    return parseIds;
 }
 
 export default class CloseNotifyComponent extends Component {
+    @service siteSettings;
     @tracked shouldRender = false;
     @tracked icon;
     @tracked title;
@@ -30,7 +33,9 @@ export default class CloseNotifyComponent extends Component {
             this,
             this.#updateFromTopicStatus,
         );
-        const enabledCategories = getEnabledCategories();
+        const enabledCategories = parseIds(
+            this.siteSettings.notify_enabled_categories,
+        );
         const categoryId = this.getTopic().category_id;
         this.shouldRender = enabledCategories?.includes(categoryId) ?? true;
     }
@@ -51,12 +56,16 @@ export default class CloseNotifyComponent extends Component {
     @action
     async do() {
         const topic = this.getTopic();
-        const closed = topic.closed;
-        const response = await ajax(`/t/${topic.id}/status`, {
-            type: 'PUT',
-            data: { status: 'closed', enabled: closed ? 'false' : 'true' },
-        });
-        next(() => DiscourseURL.routeTo(topic.url));
+        const close = !topic.closed;
+        try {
+            await ajax(`/t/${topic.id}/status`, {
+                type: 'PUT',
+                data: { status: 'closed', enabled: close ? 'true' : 'false' },
+            });
+            next(() => DiscourseURL.routeTo(topic.url));
+        } catch (e) {
+            console.error(e);
+        }
     }
 
     #updateFromTopicStatus() {
@@ -64,7 +73,7 @@ export default class CloseNotifyComponent extends Component {
         const closed = topic.closed;
         const buttonState = closed ? 'open' : 'close';
         this.icon = closed ? 'unlock' : 'lock';
-        this.title = themePrefix(`close_notify.button.${buttonState}.title`);
-        this.label = themePrefix(`close_notify.button.${buttonState}.label`);
+        this.title = `close_notify.button.${buttonState}.title`;
+        this.label = `close_notify.button.${buttonState}.label`;
     }
 }
