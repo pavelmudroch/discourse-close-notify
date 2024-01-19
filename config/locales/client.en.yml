@@ -6,6 +6,9 @@ en:
         close: 'Closed'
         open: 'Opened'
         close_notify:
+            notification:
+                close: 'closed'
+                open: 'opened'
             button:
                 close:
                     label: 'Close'

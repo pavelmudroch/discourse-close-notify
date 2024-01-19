@@ -8,6 +8,8 @@
 
 enabled_site_setting :notify_enabled
 
+register_asset 'stylesheets/notify.scss'
+
 def is_topic_from_enabled_category(topic)
     SiteSetting.notify_enabled_categories.blank? || SiteSetting.notify_enabled_categories.split('|').include?(topic.category_id.to_s)
 end
@@ -45,8 +47,7 @@ def notify_users(owner, topic, status)
         topic_title: topic.title,
         display_username: owner.username,
         message: status,
-        icon: status == 'close' ? 'lock' : 'unlock',
-        excerpt: 'some excerpt'
+        fancy_title: 'some fancy title'
     }.to_json
     topic.topic_users.where(notification_level: get_notification_levels).each do |tu|
         break if tu.user_id == owner.id

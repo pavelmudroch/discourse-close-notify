@@ -6,6 +6,9 @@ cs:
         close: 'Uzavřeno'
         open: 'Otevřeno'
         close_notify:
+            notification:
+                close: 'uzavřel(a)'
+                open: 'otevřel(a)'
             button:
                 close:
                     label: 'Uzavřít'
