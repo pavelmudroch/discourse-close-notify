@@ -4,4 +4,4 @@ en:
         notify_enabled_categories: 'Select categories to enable close notify plugin. Leave blank to enable for all categories.'
         notify_on_close: 'Notify users when topic is closed'
         notify_on_open: 'Notify users when topic is opened'
-        notify_watch_level: 'Select lowest watch level to notify users'
+        notify_watch_level: 'Select lowest watch level to notify users. Watch level precedence: watching > tracking > watching first post > normal'

@@ -46,12 +46,6 @@ export default {
                     };
                 },
             );
-
-            // api.modifyClass('component:notification-type-base', {
-            //     get icon() {
-            //         return 'bell';
-            //     },
-            // });
         });
     },
 };

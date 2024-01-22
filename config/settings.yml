@@ -19,4 +19,5 @@ plugins:
         choices:
             - 'watching'
             - 'tracking'
+            - 'watching_first_post'
             - 'normal'
