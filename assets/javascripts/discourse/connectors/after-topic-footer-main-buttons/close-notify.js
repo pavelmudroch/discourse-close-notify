@@ -56,13 +56,10 @@ export default class CloseNotifyComponent extends Component {
     @action
     async do() {
         const topic = this.getTopic();
-        const close = !topic.closed;
         try {
-            await ajax(`/t/${topic.id}/status`, {
-                type: 'PUT',
-                data: { status: 'closed', enabled: close ? 'true' : 'false' },
+            topic.toggleStatus('closed').then((result) => {
+                topic.set('topic_status_update', result.topic_status_update);
             });
-            next(() => DiscourseURL.routeTo(topic.url));
         } catch (e) {
             console.error(e);
         }
