@@ -3,8 +3,9 @@ cs:
         notifications:
             titles:
                 custom: 'změna stavu tématu'
-        close: 'Uzavřeno'
-        open: 'Otevřeno'
+        notify:
+            close: 'Uzavřeno'
+            open: 'Otevřeno'
         close_notify:
             notification:
                 close: 'uzavřel(a)'

@@ -3,8 +3,9 @@ en:
         notifications:
             titles:
                 custom: 'topic status changed'
-        close: 'Closed'
-        open: 'Opened'
+        notify:
+            close: 'Closed'
+            open: 'Opened'
         close_notify:
             notification:
                 close: 'closed'

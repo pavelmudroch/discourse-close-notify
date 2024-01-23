@@ -3,9 +3,6 @@ import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { addObserver, removeObserver } from '@ember/object/observers';
-import { ajax } from 'discourse/lib/ajax';
-import { next } from '@ember/runloop';
-import DiscourseURL from 'discourse/lib/url';
 
 function parseIds(ids) {
     const parseIds = ids

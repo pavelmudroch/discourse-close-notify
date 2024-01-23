@@ -2,7 +2,7 @@
 
 # name: discourse-close-notify
 # about: Simple plugin to notify users about closed topic
-# version: 0.2.1
+# version: 0.2.2
 # authors: Pavel Mudroch
 # url: https://github.com/pavelmudroch/discourse-close-notify
 
@@ -51,7 +51,7 @@ def notify_users(owner, topic, status)
     data = {
         topic_title: topic.title,
         display_username: owner.username,
-        message: status,
+        message: 'notify.' + status,
     }.to_json
 
     notified_user_ids = Set.new
