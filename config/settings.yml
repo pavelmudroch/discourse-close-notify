@@ -21,3 +21,7 @@ plugins:
             - 'tracking'
             - 'watching_first_post'
             - 'normal'
+    notify_deployed_tag:
+        type: tag
+        default: ''
+        client: true

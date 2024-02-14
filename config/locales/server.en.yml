@@ -5,3 +5,4 @@ en:
         notify_on_close: 'Notify users when topic is closed'
         notify_on_open: 'Notify users when topic is opened'
         notify_watch_level: 'Select lowest watch level to notify users. Watch level precedence: watching > tracking > watching first post > normal'
+        notify_deployed_tag: 'Tag for deployed topics'

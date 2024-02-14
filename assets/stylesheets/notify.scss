@@ -1,0 +1,14 @@
+.btn-deploy {
+    color: var(--secondary);
+    background-color: var(--success);
+
+    .d-icon {
+        color: var(--success-low);
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+        background-color: var(--success-hover) !important;
+    }
+}

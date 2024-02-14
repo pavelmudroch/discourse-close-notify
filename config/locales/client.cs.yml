@@ -17,3 +17,9 @@ cs:
                 open:
                     label: 'Otevřít'
                     title: 'otevře toto téma a notifikuje uživatele'
+                deploy:
+                    label: 'Nasazeno'
+                    title: 'nasadit toto téma'
+                undeploy:
+                    label: 'Zrušit Nasazení'
+                    title: 'zrušit nasazení tohoto tématu'

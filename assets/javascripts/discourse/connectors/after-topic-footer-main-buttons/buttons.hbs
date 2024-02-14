@@ -1,0 +1,18 @@
+{{#if this.shouldRender}}
+    {{#unless this.closed}}
+        <DButton
+            @icon={{this.deployIcon}}
+            @label={{this.deployLabel}}
+            @title={{this.deployTitle}}
+            @class='btn-icon {{this.deployClass}}'
+            {{on 'click' this.doDeploy}}
+        />
+    {{/unless}}
+    <DButton
+        @icon={{this.closeIcon}}
+        @label={{this.closeLabel}}
+        @title={{this.closeTitle}}
+        @class='btn-danger'
+        {{on 'click' this.doClose}}
+    />
+{{/if}}

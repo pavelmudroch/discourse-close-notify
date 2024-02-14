@@ -17,3 +17,9 @@ en:
                 open:
                     label: 'Open'
                     title: 'open topic and notify users'
+                deploy:
+                    label: 'Deployed'
+                    title: 'deploy this topic'
+                undeploy:
+                    label: 'Undeploy'
+                    title: 'undeploy this topic'
