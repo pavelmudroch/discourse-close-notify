@@ -2,7 +2,7 @@
 
 # name: discourse-close-notify
 # about: Simple plugin to notify users about closed topic
-# version: 0.2.2
+# version: 0.3.0
 # authors: Pavel Mudroch
 # url: https://github.com/pavelmudroch/discourse-close-notify
 
