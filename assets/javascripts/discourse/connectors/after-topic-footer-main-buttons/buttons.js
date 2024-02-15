@@ -34,6 +34,8 @@ function createObserversForTopic(topic, target) {
 
 export default class CloseNotifyComponent extends Component {
     @service siteSettings;
+    @service appEvents;
+
     @tracked shouldRender = false;
     @tracked closed;
     @tracked closeIcon;
@@ -55,10 +57,12 @@ export default class CloseNotifyComponent extends Component {
         );
         const categoryId = this.getTopic().category_id;
         this.shouldRender = enabledCategories?.includes(categoryId) ?? true;
+        this.appEvents.on('page:changed', this, this.#onTopicChange);
     }
 
     willDestroy() {
         this.#observers.remove();
+        this.appEvents.off('page:changed', this, this.#onTopicChange);
     }
 
     getTopic() {
@@ -118,5 +122,11 @@ export default class CloseNotifyComponent extends Component {
         this.deployTitle = `close_notify.button.${deployState}.title`;
         this.deployLabel = `close_notify.button.${deployState}.label`;
         this.deployClass = deployed ? 'btn-danger' : 'btn-deploy';
+    }
+
+    #onTopicChange() {
+        this.#observers.remove();
+        this.#observers = createObserversForTopic(this.getTopic(), this);
+        this.updateFromTopicStatus();
     }
 }
