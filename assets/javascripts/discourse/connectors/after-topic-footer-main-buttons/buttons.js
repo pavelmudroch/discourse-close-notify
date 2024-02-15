@@ -15,6 +15,23 @@ function parseIds(ids) {
     return parseIds;
 }
 
+function createObserversForTopic(topic, target) {
+    addObserver(topic, 'closed', target, target.updateFromTopicStatus);
+    addObserver(topic, 'tags', target, target.updateFromTopicStatus);
+
+    return {
+        remove: () => {
+            removeObserver(
+                topic,
+                'closed',
+                target,
+                target.updateFromTopicStatus,
+            );
+            removeObserver(topic, 'tags', target, target.updateFromTopicStatus);
+        },
+    };
+}
+
 export default class CloseNotifyComponent extends Component {
     @service siteSettings;
     @tracked shouldRender = false;
@@ -27,16 +44,12 @@ export default class CloseNotifyComponent extends Component {
     @tracked deployLabel;
     @tracked deployClass;
 
+    #observers;
+
     constructor() {
         super(...arguments);
-        this.#updateFromTopicStatus();
-        addObserver(
-            this.getTopic(),
-            'closed',
-            this,
-            this.#updateFromTopicStatus,
-        );
-        addObserver(this.getTopic(), 'tags', this, this.#updateFromTopicStatus);
+        this.updateFromTopicStatus();
+        this.#observers = createObserversForTopic(this.getTopic(), this);
         const enabledCategories = parseIds(
             this.siteSettings.notify_enabled_categories,
         );
@@ -45,12 +58,7 @@ export default class CloseNotifyComponent extends Component {
     }
 
     willDestroy() {
-        removeObserver(
-            this.getTopic(),
-            'closed',
-            this,
-            this.#updateFromTopicStatus,
-        );
+        this.#observers.remove();
     }
 
     getTopic() {
@@ -95,7 +103,7 @@ export default class CloseNotifyComponent extends Component {
         // topic.tags = tags;
     }
 
-    #updateFromTopicStatus() {
+    updateFromTopicStatus() {
         const topic = this.getTopic();
         const closed = topic.closed;
         this.closed = closed;
