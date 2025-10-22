@@ -113,7 +113,7 @@ export default class CloseNotifyComponent extends Component {
 
 		const deployed = this.isDeployed();
 		const deployState = deployed ? "undeploy" : "deploy";
-		this.deployIcon = deployed ? "times" : "check";
+		this.deployIcon = deployed ? "xmark" : "check";
 		this.deployTitle = `close_notify.button.${deployState}.title`;
 		this.deployLabel = `close_notify.button.${deployState}.label`;
 		this.deployClass = deployed ? "btn-danger" : "btn-deploy";
