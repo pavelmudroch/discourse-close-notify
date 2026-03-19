@@ -1,18 +1,20 @@
 import { action } from "@ember/object";
 import { addObserver, removeObserver } from "@ember/object/observers";
-import { inject as service } from "@ember/service";
+import { service } from "@ember/service";
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
 import { ajax } from "discourse/lib/ajax";
 
 function parseIds(ids) {
-	const parseIds = ids
+	const parsedIds = ids
 		.split("|")
 		.map((c) => Number.parseInt(c, 10))
 		.filter(Number.isFinite);
-	if (parseIds.length === 0) return null;
+	if (parsedIds.length === 0) {
+		return null;
+	}
 
-	return parseIds;
+	return parsedIds;
 }
 
 function createObserversForTopic(topic, target) {
@@ -66,7 +68,9 @@ export default class CloseNotifyComponent extends Component {
 
 	isDeployed() {
 		const topic = this.getTopic();
-		if (!topic) return false;
+		if (!topic) {
+			return false;
+		}
 
 		return topic.tags?.includes(this.siteSettings.notify_deployed_tag) ?? false;
 	}
