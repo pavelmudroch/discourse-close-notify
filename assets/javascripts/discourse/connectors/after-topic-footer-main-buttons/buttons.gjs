@@ -126,12 +126,13 @@ export default class CloseNotifyComponent extends Component {
 			? topic.tags.filter((t) => t.name !== this.siteSettings.notify_deployed_tag)
 			: [...topic.tags, { name: this.siteSettings.notify_deployed_tag }];
 
-		// debug("#setting tags:", tags.join(","));
+		debug("#setting tags:", tags.join(","));
 		await ajax(`/t/-/${topic.id}`, {
 			type: "PUT",
-			data: {
+            contentType: "application/json",
+			data: JSON.stringify({
 				tags,
-			},
+			}),
 		});
 		// topic.tags = tags;
 	}
