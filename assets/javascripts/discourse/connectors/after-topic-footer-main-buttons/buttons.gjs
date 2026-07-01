@@ -96,7 +96,12 @@ export default class CloseNotifyComponent extends Component {
 			return false;
 		}
 
-		return topic.tags?.includes(this.siteSettings.notify_deployed_tag) ?? false;
+        for (const tag of topic.tags) {
+            if (tag.name === this.siteSettings.notify_deployed_tag) {
+                return true;
+            }
+        }
+		return false;
 	}
 
 	@action
@@ -118,8 +123,8 @@ export default class CloseNotifyComponent extends Component {
 	async doDeploy() {
 		const topic = this.getTopic();
 		const tags = this.isDeployed()
-			? topic.tags.filter((t) => t !== this.siteSettings.notify_deployed_tag)
-			: [...topic.tags, this.siteSettings.notify_deployed_tag];
+			? topic.tags.filter((t) => t.name !== this.siteSettings.notify_deployed_tag)
+			: [...topic.tags, { name: this.siteSettings.notify_deployed_tag }];
 
 		debug("#setting tags:", tags.join(","));
 		await ajax(`/t/-/${topic.id}.json`, {
